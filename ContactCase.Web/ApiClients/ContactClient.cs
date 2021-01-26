@@ -22,7 +22,7 @@ namespace ContactCase.Web.ApiClients
 
         public async Task<ContactModel> GetById(Guid id)
         {
-            var response = await _httpClient.GetAsync($"api/v1/contacts/{id}");
+            var response = await _httpClient.GetAsync($"api/contacts/{id}");
             if (response.IsSuccessStatusCode)
                 return await response.Content.ReadFromJsonAsync<ContactModel>();
 
@@ -31,19 +31,19 @@ namespace ContactCase.Web.ApiClients
 
         public async Task<ContactModel> Create(ContactModel model)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/v1/contacts", model);
+            var response = await _httpClient.PostAsJsonAsync("api/contacts", model);
             return await response.Content.ReadFromJsonAsync<ContactModel>();
         }
 
-        public async Task<ContactModel> Updatet(ContactModel model)
+        public async Task<ContactModel> Update(ContactModel model)
         {
-            var response = await _httpClient.PutAsJsonAsync("api/v1/contacts", model);
+            var response = await _httpClient.PutAsJsonAsync("api/contacts", model);
             return await response.Content.ReadFromJsonAsync<ContactModel>();
         }
 
         public async Task<bool> Delete(Guid id)
         {
-            var response = await _httpClient.DeleteAsync($"api/v1/contacts/{id}");
+            var response = await _httpClient.DeleteAsync($"api/contacts/{id}");
             return response.IsSuccessStatusCode;
         }
     }
