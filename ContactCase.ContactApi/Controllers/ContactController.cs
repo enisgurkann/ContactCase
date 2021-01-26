@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace ContactCase.ContactApi.Controllers
 {
     [ApiController]
@@ -17,7 +16,7 @@ namespace ContactCase.ContactApi.Controllers
     public class ContactController : ControllerBase
     {
         IContactService _contactService;
-        public ContactController(ContactService contactService)
+        public ContactController(IContactService contactService)
         {
             _contactService = contactService;
         }
@@ -42,5 +41,23 @@ namespace ContactCase.ContactApi.Controllers
             return Ok(contacts);
         }
 
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update([FromBody] Contact model)
+        {
+            if (model is null)
+                return BadRequest();
+
+            var contactModel = await _contactService.Update(model);
+            return Ok(contactModel);
+        }
+
+        [HttpDelete("{id:Guid?}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            await _contactService.Remove(id);
+            return NoContent();
+        }
     }
 }

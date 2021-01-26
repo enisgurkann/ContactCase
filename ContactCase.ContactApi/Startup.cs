@@ -30,23 +30,19 @@ namespace ContactCase.ContactApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            services.AddCors();
-
             string connectionString = Configuration["ConnectionStrings:Default"];
             services.AddDbContext<AppDBContext>(options => {
                 options.UseNpgsql(connectionString, o => o.MigrationsHistoryTable("_history"));
             });
 
 
-            services.AddTransient<IContactService, ContactService>();
+            services.AddScoped<IContactService, ContactService>();
 
-
-            services.AddSwaggerGen(c =>
-            {
+            services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactCase.ContactApi", Version = "v1" });
             });
+            services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

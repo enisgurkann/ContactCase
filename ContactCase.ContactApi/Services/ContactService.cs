@@ -21,26 +21,30 @@ namespace ContactCase.ContactApi.Services
             await _datacontext.Contacts.AddAsync(model);
             return await _datacontext.SaveChangesAsync() > 0;
         }
+     
 
-        public async Task<IEnumerable<Contact>> GetAll(int pageIndex, int pageSize)
+        public async Task<Contact> GetById(Guid Id)
+        {
+           return await _datacontext.Contacts.FirstOrDefaultAsync(s => s.Id == Id);
+        }
+
+        public async Task<bool> Remove(Guid Id)
+        {
+            var model = await GetById(Id);
+            _datacontext.Contacts.Remove(model);
+            return await _datacontext.SaveChangesAsync() > 0;
+        }
+
+        public async Task<List<Contact>> GetAll(int pageIndex, int pageSize)
         {
             List<Contact> lists = await _datacontext.Contacts.Skip(pageIndex).Take(pageSize).ToListAsync();
-            return (IEnumerable<Contact>)lists;
+            return lists;
         }
 
-        public Task<Contact> GetById(Guid Id)
+        public async Task<bool> Update(Contact model)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> Remove(Guid Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<Contact>> IContactService.GetAll(int pageIndex, int pageSize)
-        {
-            throw new NotImplementedException();
+            _datacontext.Contacts.Update(model);
+            return await _datacontext.SaveChangesAsync() > 0;
         }
     }
 }
