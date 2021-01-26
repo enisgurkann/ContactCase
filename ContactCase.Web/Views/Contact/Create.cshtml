@@ -1,5 +1,100 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@model ContactModel
+
+
+@{ ViewData["Title"] = "New Contact"; }
+
+
+
+<div class="text-center">
+    <h1 class="display-4">New Contact</h1>
+</div>
+
+<form asp-action="Create" asp-controller="Contact" asp-area="" method="post" role="form" novalidate>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Contact</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="FirstName">FirstName</label>
+                        <input type="text" class="form-control" asp-for="FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LastName">LastName</label>
+                        <input type="text" class="form-control" asp-for="LastName" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CompanyName">CompanyName</label>
+                        <input type="text" class="form-control" asp-for="CompanyName" />
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Contact Info</h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped" id="table-info">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.Infos.Count; i++)
+                            {
+                                var item = Model.Infos[i];
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="Infos[i].Id" />
+                        <input type="hidden" asp-for="Infos[i].ContactId" />
+                        <input type="hidden" asp-for="Infos[i].InfoType" />
+                        @item.InfoType
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="Infos[i].Value" />
+                        @item
+                    </td>
+                    <td><button type="button" onclick="removeinforow(this)" class="btn btn-sm btn-danger">Remove</button></td>
+                </tr>}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><input type="text" class="form-control" id="info-type" placeholder="Type" /></td>
+                                <td><input type="text" class="form-control" id="info-value" placeholder="Value" /></td>
+                                <td><button type="button" onclick="addinforow()" class="btn btn-sm btn-success">Add</button></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 text-right mt-3">
+            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+        </div>
+    </div>
+</form>
+@section scripts {
+    <script>
+
+        function addinforow() {
+
+        }
+
+        function removeinforow(e) {
+            $(e).parents("tr").remove();
+        }
+    </script>
+
 }

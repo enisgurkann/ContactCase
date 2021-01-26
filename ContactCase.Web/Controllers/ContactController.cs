@@ -16,7 +16,7 @@ namespace ContactCase.Web.Controllers
         public ContactController(ContactClient contactClient) => _contactClient = contactClient;
         public async Task<IActionResult> Index([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 20) => View(await _contactClient.GetContacts(pageIndex, pageSize));
 
-        public IActionResult Create() => View(new ContactModel();
+        public IActionResult Create() => View(new ContactModel());
 
 
     }
