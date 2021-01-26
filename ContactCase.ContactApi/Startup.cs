@@ -1,4 +1,5 @@
 using ContactCase.ContactApi.Data;
+using ContactCase.ContactApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -37,6 +38,10 @@ namespace ContactCase.ContactApi
             services.AddDbContext<AppDBContext>(options => {
                 options.UseNpgsql(connectionString, o => o.MigrationsHistoryTable("_history"));
             });
+
+
+            services.AddSingleton<IContactService, ContactService>();
+
 
             services.AddSwaggerGen(c =>
             {
