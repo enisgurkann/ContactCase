@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Correlate.DependencyInjection" Version="3.3.0" />
+    <PackageReference Include="Correlate.AspNetCore" Version="3.3.0" />
     <PackageReference Include="Ocelot" Version="17.0.0" />
+    <PackageReference Include="Ocelot.Cache.CacheManager" Version="17.0.0" />
   </ItemGroup>
 
 </Project>

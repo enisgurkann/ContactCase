@@ -39,18 +39,6 @@ namespace ContactCase.Gateway
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
-
-
-
-            //use correlate identifier
-
             //use routing
             app.UseRouting();
 
