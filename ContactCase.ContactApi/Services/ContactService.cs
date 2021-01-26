@@ -10,21 +10,22 @@ namespace ContactCase.ContactApi.Services
 {
     public class ContactService : IContactService
     {
-        AppDBContext _datacontext;
+        private readonly AppDBContext _datacontext;
         public ContactService(AppDBContext context)
         {
             _datacontext = context;
         }
 
-        public Task<bool> Add(ContactInfo model)
+        public async Task<bool> Add(Contact model)
         {
-            throw new NotImplementedException();
+            await _datacontext.Contacts.AddAsync(model);
+            return await _datacontext.SaveChangesAsync() > 0;
         }
 
-        public async Task<IEnumerable<ContactInfo>> GetAll(int pageIndex, int pageSize)
+        public async Task<IEnumerable<Contact>> GetAll(int pageIndex, int pageSize)
         {
             List<Contact> lists = await _datacontext.Contacts.Skip(pageIndex).Take(pageSize).ToListAsync();
-            return (IEnumerable<ContactInfo>)lists;
+            return (IEnumerable<Contact>)lists;
         }
 
         public Task<Contact> GetById(Guid Id)
@@ -37,7 +38,7 @@ namespace ContactCase.ContactApi.Services
             throw new NotImplementedException();
         }
 
-        Task<List<ContactInfo>> IContactService.GetAll(int pageIndex, int pageSize)
+        Task<List<Contact>> IContactService.GetAll(int pageIndex, int pageSize)
         {
             throw new NotImplementedException();
         }

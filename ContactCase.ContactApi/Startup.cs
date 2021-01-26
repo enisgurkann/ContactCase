@@ -40,7 +40,7 @@ namespace ContactCase.ContactApi
             });
 
 
-            services.AddSingleton<IContactService, ContactService>();
+            services.AddTransient<IContactService, ContactService>();
 
 
             services.AddSwaggerGen(c =>
