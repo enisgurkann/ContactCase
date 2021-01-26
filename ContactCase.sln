@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactCase.Gateway", "ContactCase.Gateway\ContactCase.Gateway.csproj", "{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -60,8 +60,6 @@ namespace ContactCase.ContactApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<int>("InfoTypeId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Value")
                         .HasMaxLength(150)
