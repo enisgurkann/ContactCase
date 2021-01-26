@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactCase.Web.ApiClients;
+using ContactCase.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +11,13 @@ namespace ContactCase.Web.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        private readonly ContactClient _contactClient;
+
+        public ContactController(ContactClient contactClient) => _contactClient = contactClient;
+        public async Task<IActionResult> Index([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 20) => View(await _contactClient.GetContacts(pageIndex, pageSize));
+
+        public IActionResult Create() => View(new ContactModel();
+
+
     }
 }

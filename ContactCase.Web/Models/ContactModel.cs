@@ -12,5 +12,7 @@ namespace ContactCase.Web.Models
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public DateTime CreateDate { get; set; }
+
+        public List<ContactInfo> Infos { get; set; } = new List<ContactInfo>();
     }
 }

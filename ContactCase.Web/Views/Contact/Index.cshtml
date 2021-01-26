@@ -1,0 +1,63 @@
+﻿@{ ViewData["Title"] = "Contacts"; }
+@model List<ContactModel>
+
+<div class="text-center">
+    <h1 class="display-4">Contacts</h1>
+</div>
+
+<a asp-action="Create" asp-controller="Contact" asp-area="" class="btn btn-sm btn-primary mb-3">Create</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>CompanyName</th>
+            <th>CreateDate</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+@foreach (var contact in Model)
+{
+<tr>
+    <td>@contact.FirstName</td>
+    <td>@contact.LastName</td>
+    <td>@contact.CompanyName</td>
+    <td>@contact.CreateDate.ToShortDateString()</td>
+    <td>
+        <a asp-action="Edit" asp-controller="Contact" asp-area="" asp-route-id="@contact.Id" class="btn btn-sm btn-secondary">Edit</a>
+        <button class="btn btn-sm btn-danger btn-delete" onclick="remove(@contact.Id)">Delete</button>
+    </td>
+</tr>
+} 
+        }
+        else
+        {
+<tr>
+    <td colspan="5">
+        <span>No record</span>
+    </td>
+</tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+    <script>
+        function remove(id) {
+            if (confirm("Emin misin?")) {
+
+                $.post("@Url.Action("Delete", "Contact")/" + id, function (response) {
+                    if (response && response.success) {
+                        window.location.reload();
+                    } else {
+                        alert("Hata oluştu.");
+                    }
+                });
+            }
+        }
+    </script>
+}

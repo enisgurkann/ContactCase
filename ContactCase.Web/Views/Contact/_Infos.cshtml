@@ -1,0 +1,36 @@
+﻿@model ContactModel
+
+<table class="table table-bordered table-striped" id="table-info">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Infos.Count; i++)
+        {
+            var item = Model.Infos[i];
+            <tr>
+                <td>
+                    <input type="hidden" asp-for="Infos[i].Id" />
+                    <input type="hidden" asp-for="Infos[i].ContactId" />
+                    <input type="hidden" asp-for="Infos[i].InfoType" />
+                    @item.InfoType
+                </td>
+                <td>
+                    <input type="hidden" asp-for="Infos[i].Value" />
+                    @item
+                </td>
+                <td><button type="button" name="btn-remove-row" class="btn btn-sm btn-danger">Remove</button></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td><input type="text" class="form-control" id="info-type" placeholder="info type" /></td>
+            <td><input type="text" class="form-control" id="info-value" placeholder="info value" /></td>
+            <td><button type="button" id="btn-add-row" class="btn btn-sm btn-success">Add</button></td>
+        </tr>
+    </tfoot>
+</table>
