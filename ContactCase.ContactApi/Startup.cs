@@ -1,6 +1,7 @@
 using ContactCase.ContactApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace ContactCase.ContactApi
         {
 
             services.AddControllers();
-
+            services.AddCors();
 
             string connectionString = Configuration["ConnectionStrings:Default"];
             services.AddDbContext<AppDBContext>(options => {
@@ -53,11 +54,22 @@ namespace ContactCase.ContactApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ContactCase.ContactApi v1"));
             }
 
+
+            using (var scope = app.ApplicationServices.CreateScope())
+                using (var context = scope.ServiceProvider.GetRequiredService<AppDBContext>()) {
+                    context.Database.Migrate();
+                }
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(x => x
+           .WithMethods(HttpMethods.Get, HttpMethods.Post, HttpMethods.Put, HttpMethods.Delete)
+           .AllowAnyOrigin()
+           .AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {
