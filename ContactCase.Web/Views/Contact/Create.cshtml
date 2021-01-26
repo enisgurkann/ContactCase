@@ -89,7 +89,34 @@
     <script>
 
         function addinforow() {
+            var rowcount = $("#table-info > tbody > tr").length;
 
+            var idName = "Infos[" + rowcount + "].Id";
+            var contactIdName = "Infos[" + rowcount + "].ContactId";
+            var infoTypeName = "Infos[" + rowcount + "].InfoType";
+
+            var infoValue = $("#info-type").val();
+            $("#info-type").val("");
+
+            var valueName = "Infos[" + rowcount + "].Value";
+            var valueValue = $("#info-value").val();
+            $("#info-value").val("");
+
+            var row = `<tr>
+                           <td>
+                               <input type="hidden" name="${idName}" />
+                               <input type="hidden" name="${contactIdName}" />
+                               <input type="hidden" name="${infoTypeName}" value="${infoValue}" />
+                               ${infoValue}
+                           </td>
+                           <td>
+                               <input type="hidden" name="${valueName}" value="${valueValue}" />
+                               ${valueValue}
+                           </td>
+                           <td><button type="button" name="btn-remove-row" class="btn btn-sm btn-danger">Remove</button></td>
+                       </tr>`
+
+            $("#table-info tbody").append(row);
         }
 
         function removeinforow(e) {

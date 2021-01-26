@@ -18,6 +18,16 @@ namespace ContactCase.Web.Controllers
 
         public IActionResult Create() => View(new ContactModel());
 
+        [HttpPost]
+        public async Task<IActionResult> Create(ContactModel model)
+        {
+            var result = await _contactClient.Create(model);
+            if (result is not null) 
+                return RedirectToAction("Edit", new { id = result.Id });
+
+            return View(model);
+        }
+
 
     }
 }
