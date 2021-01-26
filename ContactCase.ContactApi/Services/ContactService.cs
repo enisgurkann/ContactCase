@@ -8,8 +8,24 @@ namespace ContactCase.ContactApi.Services
 {
     public class ContactService : IContactService
     {
-        public Task<bool> Add { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Task<bool> Remove { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public Task<Contact> GetById { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Task<bool> Add(ContactInfo model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ContactInfo>> GetAll(int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Contact> GetById(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Remove(int Id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

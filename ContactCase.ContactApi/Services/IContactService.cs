@@ -8,8 +8,9 @@ namespace ContactCase.ContactApi.Services
 {
     interface IContactService
     {
-        Task<bool> Add { get; set; }
-        Task<bool> Remove { get; set; }
-        Task<Contact> GetById { get; set; }
+        Task<IEnumerable<ContactInfo>> GetAll(int pageIndex, int pageSize);
+        Task<bool> Add(ContactInfo model);
+        Task<bool> Remove(int Id);
+        Task<Contact> GetById(int Id);
     }
 }
