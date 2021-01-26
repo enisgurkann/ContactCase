@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactCase.Shared", "ContactCase.Shared\ContactCase.Shared.csproj", "{D9A0525E-A2C4-4312-9221-FBBB0CBF9B04}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2A30A94A-119A-4DFC-A304-AA54E6E73749}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{159E197F-5CE5-4BF8-8107-243D8BBB5C51}"
@@ -13,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Items", "Items", "{159E197F
 		readme.md = readme.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactCase.ContactApi", "ContactCase.ContactApi\ContactCase.ContactApi.csproj", "{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactCase.ContactApi", "ContactCase.ContactApi\ContactCase.ContactApi.csproj", "{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A7752F42-0A0D-4677-A49D-F47DDCACBC15}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D9A0525E-A2C4-4312-9221-FBBB0CBF9B04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9A0525E-A2C4-4312-9221-FBBB0CBF9B04}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9A0525E-A2C4-4312-9221-FBBB0CBF9B04}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9A0525E-A2C4-4312-9221-FBBB0CBF9B04}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
