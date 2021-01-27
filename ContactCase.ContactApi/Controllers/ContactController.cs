@@ -59,5 +59,19 @@ namespace ContactCase.ContactApi.Controllers
             await _contactService.Remove(id);
             return NoContent();
         }
+
+        [HttpGet("{id:Guid?}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetById([FromRoute] Guid? id)
+        {
+            if (!id.HasValue)
+                return BadRequest();
+
+            var model = await _contactService.GetById(id.Value);
+            if (model == null)
+                return NotFound("Not found.");
+
+            return Ok(model);
+        }
     }
 }

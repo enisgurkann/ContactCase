@@ -1,12 +1,12 @@
 ﻿@model ContactModel
 
 
-@{ ViewData["Title"] = "New Contact"; }
+@{ ViewData["Title"] = "Edit Contact"; }
 
 
 
 <div class="text-center">
-    <h1>New Contact</h1>
+    <h1>Edit Contact</h1>
 </div>
 
 <form asp-action="Create" asp-controller="Contact" asp-area="" method="post" role="form" novalidate>
@@ -66,7 +66,8 @@
                         @item
                     </td>
                     <td><button type="button" onclick="removeinforow(this)" class="btn btn-sm btn-danger">Remove</button></td>
-                </tr>}
+                </tr>
+}
                         </tbody>
                         <tfoot>
                             <tr>
@@ -85,43 +86,3 @@
         </div>
     </div>
 </form>
-@section scripts {
-    <script>
-
-        function addinforow() {
-            var rowcount = $("#table-info > tbody > tr").length;
-
-            var idName = "Infos[" + rowcount + "].Id";
-            var contactIdName = "Infos[" + rowcount + "].ContactId";
-            var infoTypeName = "Infos[" + rowcount + "].InfoType";
-
-            var infoValue = $("#info-type").val();
-            $("#info-type").val("");
-
-            var valueName = "Infos[" + rowcount + "].Value";
-            var valueValue = $("#info-value").val();
-            $("#info-value").val("");
-
-            var row = `<tr>
-                           <td>
-                               <input type="hidden" name="${idName}" />
-                               <input type="hidden" name="${contactIdName}" />
-                               <input type="hidden" name="${infoTypeName}" value="${infoValue}" />
-                               ${infoValue}
-                           </td>
-                           <td>
-                               <input type="hidden" name="${valueName}" value="${valueValue}" />
-                               ${valueValue}
-                           </td>
-                           <td><button type="button" name="btn-remove-row" class="btn btn-sm btn-danger">Remove</button></td>
-                       </tr>`
-
-            $("#table-info tbody").append(row);
-        }
-
-        function removeinforow(e) {
-            $(e).parents("tr").remove();
-        }
-    </script>
-
-}

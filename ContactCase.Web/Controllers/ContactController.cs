@@ -40,5 +40,20 @@ namespace ContactCase.Web.Controllers
 
             return StatusCode(404);
         }
+
+        public async Task<IActionResult> Edit(Guid? id)
+        {
+            if (!id.HasValue) {
+                StatusCode(404, "Not Found");
+                return RedirectToAction("Index");
+            }
+            var model = await _contactClient.GetById(id.Value);
+            if (model == null)
+                StatusCode(404, "Not Found");
+            else
+                return View(model);
+
+            return View();
+        }
     }
 }
