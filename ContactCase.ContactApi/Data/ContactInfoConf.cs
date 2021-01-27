@@ -15,6 +15,7 @@ namespace ContactCase.ContactApi.Data
             builder.HasKey(entity => entity.Id);
             builder.Property(entity => entity.InfoType).HasMaxLength(100);
             builder.Property(entity => entity.Value).HasMaxLength(150);
+            builder.HasOne(entity => entity.Contact).WithMany(entity => entity.Infos);
 
         }
     }
