@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ContactCase.ContactApi.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210127202453_InitialCreate")]
+    [Migration("20210127221555_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

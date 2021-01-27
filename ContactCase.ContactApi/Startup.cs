@@ -1,3 +1,4 @@
+using AutoMapper;
 using ContactCase.ContactApi.Data;
 using ContactCase.ContactApi.Services;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace ContactCase.ContactApi
@@ -43,6 +45,8 @@ namespace ContactCase.ContactApi
             });
             services.AddControllers();
             services.AddCors();
+
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -25,7 +25,9 @@ namespace ContactCase.ContactApi.Services
 
         public async Task<Contact> GetById(Guid Id)
         {
-           return await _datacontext.Contacts.FirstOrDefaultAsync(s => s.Id == Id);
+            var model = await _datacontext.Contacts.FirstOrDefaultAsync(s => s.Id == Id);
+            model.Infos = await _datacontext.ContactInfos.Where(s => s.ContactId == model.Id).ToListAsync();
+            return model;
         }
 
         public async Task<bool> Remove(Guid Id)
