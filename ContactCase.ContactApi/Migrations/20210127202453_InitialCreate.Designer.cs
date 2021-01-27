@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ContactCase.ContactApi.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20210126133602_InitialCreate")]
+    [Migration("20210127202453_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,14 +60,31 @@ namespace ContactCase.ContactApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-
                     b.Property<string>("Value")
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContactId");
+
                     b.ToTable("ContactInfos");
+                });
+
+            modelBuilder.Entity("ContactCase.ContactApi.Domain.ContactInfo", b =>
+                {
+                    b.HasOne("ContactCase.ContactApi.Domain.Contact", "Contact")
+                        .WithMany("Infos")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("ContactCase.ContactApi.Domain.Contact", b =>
+                {
+                    b.Navigation("Infos");
                 });
 #pragma warning restore 612, 618
         }

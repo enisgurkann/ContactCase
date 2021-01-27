@@ -58,14 +58,31 @@ namespace ContactCase.ContactApi.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-
                     b.Property<string>("Value")
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContactId");
+
                     b.ToTable("ContactInfos");
+                });
+
+            modelBuilder.Entity("ContactCase.ContactApi.Domain.ContactInfo", b =>
+                {
+                    b.HasOne("ContactCase.ContactApi.Domain.Contact", "Contact")
+                        .WithMany("Infos")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("ContactCase.ContactApi.Domain.Contact", b =>
+                {
+                    b.Navigation("Infos");
                 });
 #pragma warning restore 612, 618
         }

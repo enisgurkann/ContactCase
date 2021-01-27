@@ -22,14 +22,14 @@
         {
 @foreach (var contact in Model)
 {
-<tr>
+<tr data-id="@contact.Id">
     <td>@contact.FirstName</td>
     <td>@contact.LastName</td>
     <td>@contact.CompanyName</td>
     <td>@contact.CreateDate.ToShortDateString()</td>
     <td>
         <a asp-action="Edit" asp-controller="Contact" asp-area="" asp-route-id="@contact.Id" class="btn btn-sm btn-secondary">Edit</a>
-        <button class="btn btn-sm btn-danger btn-delete" onclick="remove(@contact.Id)">Delete</button>
+        <button class="btn btn-sm btn-danger btn-delete" onclick="remove('@contact.Id')">Delete</button>
     </td>
 </tr>
 } 
@@ -49,13 +49,8 @@
     <script>
         function remove(id) {
             if (confirm("Emin misin?")) {
-
                 $.post("@Url.Action("Delete", "Contact")/" + id, function (response) {
-                    if (response && response.success) {
-                        window.location.reload();
-                    } else {
-                        alert("Hata oluştu.");
-                    }
+                    $("[data-id='" + id + "']").remove();
                 });
             }
         }

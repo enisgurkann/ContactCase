@@ -15,5 +15,7 @@ namespace ContactCase.ContactApi.Domain
         public string InfoType { get; set; }
         public string Value { get; set; }
 
+
+        public Contact Contact { get; set; }
     }
 }
