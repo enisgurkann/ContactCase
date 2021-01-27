@@ -69,7 +69,7 @@ namespace ContactCase.ContactApi.Controllers
 
             var model = await _contactService.GetById(id.Value);
             if (model == null)
-                return NotFound("Not found.");
+                return NotFound("Not found");
 
             return Ok(model);
         }
