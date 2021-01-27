@@ -37,8 +37,8 @@ namespace ContactCase.ContactApi.Controllers
             if (createContact is null)
                 return BadRequest();
 
-            var contacts = await _contactService.Add(createContact);
-            return Ok(contacts);
+            var stat = await _contactService.Add(createContact);
+            return Ok(stat);
         }
 
         [HttpPut]

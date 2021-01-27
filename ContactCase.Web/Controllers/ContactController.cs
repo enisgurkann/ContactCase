@@ -1,5 +1,6 @@
 ﻿using ContactCase.Web.ApiClients;
 using ContactCase.Web.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -22,12 +23,22 @@ namespace ContactCase.Web.Controllers
         public async Task<IActionResult> Create(ContactModel model)
         {
             var result = await _contactClient.Create(model);
-            if (result is not null) 
-                return RedirectToAction("Edit", new { id = result.Id });
+            if (result) 
+                return RedirectToAction("Index");
 
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete([FromRoute] Guid? id)
+        {
+            if (!id.HasValue || id.Value == Guid.Empty)
+                return StatusCode(404);
 
+            if (await _contactClient.Delete(id.Value))
+                return Ok();
+
+            return StatusCode(404);
+        }
     }
 }

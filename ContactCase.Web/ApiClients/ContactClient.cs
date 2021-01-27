@@ -14,9 +14,9 @@ namespace ContactCase.Web.ApiClients
 
         public ContactClient(HttpClient httpClient) => _httpClient = httpClient;
 
-        public Task<List<ContactModel>> GetContacts(int pageIndex, int pageSize)
+        public async Task<List<ContactModel>> GetContacts(int pageIndex, int pageSize)
         {
-            var response = _httpClient.GetFromJsonAsync<List<ContactModel>>($"api/contacts?pageIndex={pageIndex}&pageSize={pageSize}");
+            var response = await _httpClient.GetFromJsonAsync<List<ContactModel>>($"api/contacts?pageIndex={pageIndex}&pageSize={pageSize}");
             return response;
         }
 
@@ -29,16 +29,16 @@ namespace ContactCase.Web.ApiClients
             return null;
         }
 
-        public async Task<ContactModel> Create(ContactModel model)
+        public async Task<bool> Create(ContactModel model)
         {
             var response = await _httpClient.PostAsJsonAsync("api/contacts", model);
-            return await response.Content.ReadFromJsonAsync<ContactModel>();
+            return response.IsSuccessStatusCode;
         }
 
-        public async Task<ContactModel> Update(ContactModel model)
+        public async Task<bool> Update(ContactModel model)
         {
             var response = await _httpClient.PutAsJsonAsync("api/contacts", model);
-            return await response.Content.ReadFromJsonAsync<ContactModel>();
+            return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> Delete(Guid id)
