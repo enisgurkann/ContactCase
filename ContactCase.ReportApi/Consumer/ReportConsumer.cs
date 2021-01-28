@@ -1,9 +1,13 @@
 ﻿using ContactCase.ReportApi.Data;
 using ContactCase.ReportApi.Domain;
+using ContactCase.ReportApi.Services;
 using Microsoft.EntityFrameworkCore;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactCase.ReportApi.Consumer
@@ -13,6 +17,9 @@ namespace ContactCase.ReportApi.Consumer
         private readonly AppDBContext _datacontext;
         public ReportConsumer(AppDBContext context) => _datacontext = context;
 
+        private readonly RabbitMQService _rabbitMQService;
+
+      
         public async Task<bool> GenerateAsync(Guid id, string Tag, int Count)
         {
             var report = await _datacontext.Report.FirstOrDefaultAsync(x => x.Id == id);

@@ -1,4 +1,5 @@
 using ContactCase.ReportApi.Data;
+using ContactCase.ReportApi.Rabbit;
 using ContactCase.ReportApi.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,7 @@ namespace ContactCase.ReportApi
 
 
             services.AddScoped<IReportService, ReportService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,10 +69,42 @@ namespace ContactCase.ReportApi
 
             app.UseAuthorization();
 
+            app.UseRabbitListener();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+        }
+        
+    }
+    public static class ApplicationBuilderExtentions
+    {
+        //the simplest way to store a single long-living object, just for example.
+        private static RabbitListener _listener { get; set; }
+
+        public static IApplicationBuilder UseRabbitListener(this IApplicationBuilder app)
+        {
+            _listener = app.ApplicationServices.GetService<RabbitListener>();
+
+            var lifetime = app.ApplicationServices.GetService<Microsoft.Extensions.Hosting.IApplicationLifetime>();
+
+            lifetime.ApplicationStarted.Register(OnStarted);
+
+            //press Ctrl+C to reproduce if your app runs in Kestrel as a console app
+            lifetime.ApplicationStopping.Register(OnStopping);
+
+            return app;
+        }
+
+        private static void OnStarted()
+        {
+            _listener.Register();
+        }
+
+        private static void OnStopping()
+        {
+            _listener.Deregister();
         }
     }
 }
