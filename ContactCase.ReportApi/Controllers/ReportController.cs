@@ -8,17 +8,20 @@ using System.Threading.Tasks;
 namespace ContactCase.ReportApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Produces("application/json")]
+    [Consumes("application/json")]
+    [Route("api/report")]
+
+    public class ReportController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ReportController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public ReportController(ILogger<ReportController> logger)
         {
             _logger = logger;
         }
