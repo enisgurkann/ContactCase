@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactCase.Web.ApiClients;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,19 @@ namespace ContactCase.Web.Controllers
 {
     public class ReportController : Controller
     {
-        public IActionResult Index()
+        private readonly ReportApiClient _reportApiClient;
+
+        public ReportController(ReportApiClient reportApiClient)
         {
-            return View();
+            _reportApiClient = reportApiClient;
+        }
+        public async Task<IActionResult> Index([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 20)
+        {
+            var model = await _reportApiClient.GetContacts(pageIndex, pageSize);
+            model.NewReport = new ReportViewModel();
+            PrepareCommonModel(model.NewReport);
+
+            return View(model);
         }
     }
 }

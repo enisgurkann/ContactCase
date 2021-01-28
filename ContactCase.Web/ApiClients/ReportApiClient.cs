@@ -16,7 +16,7 @@ namespace ContactCase.Web.ApiClients
         {
             _httpClient = httpClient;
         }
-        public async Task<List<ReportModel>> GetContacts(int pageIndex, int pageSize)
+        public async Task<List<ReportModel>> GetReports(int pageIndex, int pageSize)
         {
             var response = await _httpClient.GetFromJsonAsync<List<ReportModel>>($"api/report?pageIndex={pageIndex}&pageSize={pageSize}");
             return response;
