@@ -1,4 +1,6 @@
-﻿using ContactCase.ReportApi.Domain;
+﻿using ContactCase.ReportApi.Data;
+using ContactCase.ReportApi.Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,19 +10,33 @@ namespace ContactCase.ReportApi.Services
 {
     public class ReportService : IReportService
     {
-        public Task<bool> Add(Report model)
+        private readonly AppDBContext _datacontext;
+        public ReportService(AppDBContext context) => _datacontext = context;
+
+        public async Task<bool> Add(string Tag)
         {
-            throw new NotImplementedException();
+            var report = new Report();
+            report.Tag = Tag;
+            report.CreateDate = DateTime.Now;
+            report.Status = false;
+            await _datacontext.Report.AddAsync(report);
+            await _datacontext.SaveChangesAsync();
+            return true;
         }
 
-        public Task<List<Report>> GetAll(int pageIndex, int pageSize)
+
+    
+
+        public async Task<List<Report>> GetAll(int pageIndex, int pageSize)
         {
-            throw new NotImplementedException();
+            List<Report> lists = await _datacontext.Report.Skip(pageIndex).Take(pageSize).ToListAsync();
+            return lists;
         }
 
-        public Task<Report> GetById(Guid Id)
+        public async Task<Report> GetById(Guid Id)
         {
-            throw new NotImplementedException();
+            var model = await _datacontext.Report.FirstOrDefaultAsync(s => s.Id == Id);
+            return model;
         }
     }
 }

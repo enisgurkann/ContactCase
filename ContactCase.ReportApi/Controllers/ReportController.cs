@@ -48,12 +48,9 @@ namespace ContactCase.ReportApi.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<IActionResult> Create([FromBody] Report model)
+        public async Task<IActionResult> Create([FromBody] string Tag)
         {
-            if (model is null)
-                return BadRequest();
-
-            var reportModel = await _reportService.Add(model);
+            var reportModel = await _reportService.Add(Tag);
             if (reportModel)
                 return Ok(reportModel);
             else

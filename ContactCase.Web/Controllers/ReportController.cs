@@ -1,8 +1,6 @@
 ﻿using ContactCase.Web.ApiClients;
+using ContactCase.Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ContactCase.Web.Controllers
@@ -17,9 +15,19 @@ namespace ContactCase.Web.Controllers
         }
         public async Task<IActionResult> Index([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 20)
         {
-            var model = await _reportApiClient.GetContacts(pageIndex, pageSize);
-            model.NewReport = new ReportViewModel();
-            PrepareCommonModel(model.NewReport);
+            var model = await _reportApiClient.GetReports(pageIndex, pageSize);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(ReportModel model)
+        {
+            if (ModelState.IsValid) {
+                var createResult = await _reportApiClient.CreateReport(model);
+                if (createResult is not null) {
+                    return RedirectToAction("Index");
+                }
+            }
 
             return View(model);
         }

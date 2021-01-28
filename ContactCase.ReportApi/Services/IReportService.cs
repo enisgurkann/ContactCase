@@ -9,7 +9,7 @@ namespace ContactCase.ReportApi.Services
     public interface IReportService
     {
         Task<List<Report>> GetAll(int pageIndex, int pageSize);
-        Task<bool> Add(Report model);
+        Task<bool> Add(string Tag);
         Task<Report> GetById(Guid Id);
     }
 }
