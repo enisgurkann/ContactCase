@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContactCase.ReportApi.Services
 {
-    interface IReportService
+    public interface IReportService
     {
         Task<List<Report>> GetAll(int pageIndex, int pageSize);
         Task<bool> Add(Report model);

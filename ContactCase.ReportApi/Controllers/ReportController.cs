@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContactCase.ReportApi.Domain;
+using ContactCase.ReportApi.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,17 +17,47 @@ namespace ContactCase.ReportApi.Controllers
 
     public class ReportController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        IReportService _reportService;
+        public ReportController(IReportService reportService)
         {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<ReportController> _logger;
-
-        public ReportController(ILogger<ReportController> logger)
-        {
-            _logger = logger;
+            _reportService = reportService;
         }
 
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAll([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 20)
+        {
+            var reports = await _reportService.GetAll(pageIndex, pageSize);
+            return Ok(reports);
+        }
+
+        [HttpGet("{id:int?}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetById([FromRoute] Guid? id)
+        {
+            if (!id.HasValue)
+                return BadRequest();
+
+            var report = await _reportService.GetById(id.Value);
+            if (report == null)
+                return NotFound("Report not found.");
+
+            return Ok(report);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Create([FromBody] Report model)
+        {
+            if (model is null)
+                return BadRequest();
+
+            var reportModel = await _reportService.Add(model);
+            if (reportModel)
+                return Ok(reportModel);
+            else
+                return NotFound("Error");
+        }
     }
 }

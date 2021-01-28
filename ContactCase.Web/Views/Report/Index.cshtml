@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Reports";
+}
+@model List<ReportModel>
+
+<div class="text-center">
+    <h1 class="display-4">Reports</h1>
+</div>
+
+<div class="row mt-5">
+    <div class="col">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Tag</th>
+                    <th>Count</th>
+                    <th>CreateDate</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    @foreach (var report in Model)
+                    {
+                        <tr>
+                            <td>@report.Tag</td>
+                            <td>@(report.Count == 0 ? "N/A" : report.Count)</td>
+                            <td>@report.CreateDate.ToShortDateString()</td>
+                            <td>@report.Status</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5">
+                            <span>No record.</span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4>New Report</h4>
+            </div>
+            <div class="card-body">
+             
+
+            </div>
+        </div>
+    </div>
+</div>
