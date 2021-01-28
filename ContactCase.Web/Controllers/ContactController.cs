@@ -55,5 +55,16 @@ namespace ContactCase.Web.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ContactModel model)
+        {
+            if (ModelState.IsValid) {
+                var updateResult = await _contactClient.Update(model);
+                if (updateResult) return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
     }
 }
