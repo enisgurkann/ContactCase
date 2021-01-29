@@ -28,9 +28,10 @@ namespace ContactCase.Web.ApiClients
             return response;
         }
 
-        public async Task<ReportModel> CreateReport(ReportModel model)
+        public async Task<ReportModel> CreateReport(string Tag)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/report", model);
+            var response = await _httpClient.PostAsJsonAsync("api/report", Tag);
+            var resp = await response.Content.ReadAsStringAsync();
             return await response.Content.ReadFromJsonAsync<ReportModel>();
         }
     }

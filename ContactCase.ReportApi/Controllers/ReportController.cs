@@ -65,22 +65,17 @@ namespace ContactCase.ReportApi.Controllers
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel()) {
 
-                    channel.ExchangeDeclare("demo.exchange", ExchangeType.Topic);
-                    channel.QueueDeclare("demo.queue.log", false, false, false, null);
-                    channel.QueueBind("demo.queue.log", "demo.exchange", "demo.queue.*", null);
-                    channel.BasicQos(0, 1, false);
-
-                    channel.QueueDeclare(queue: "ReportQuee",
-                                         durable: false,
-                                         exclusive: false,
-                                         autoDelete: false,
-                                         arguments: null);
+                    var QueueName = "RAPOROLUSTUR";
+                    var exchangeName = "RAPOROLUSTUR-Exchange";
+                    channel.ExchangeDeclare(exchangeName, ExchangeType.Topic, true);
+                    channel.QueueDeclare(QueueName, false, false, false, null);
+                    channel.QueueBind(QueueName, exchangeName, "");
 
                     var message =$"RAPOROLUSTUR${reportModel.Id}${Tag}";
                     var body = Encoding.UTF8.GetBytes(message);
 
                     channel.BasicPublish(exchange: "",
-                                         routingKey: "ReportQuee",
+                                         routingKey: "",
                                          basicProperties: null,
                                          body: body);
                 }

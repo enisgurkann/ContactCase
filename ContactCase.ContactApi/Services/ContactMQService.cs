@@ -40,10 +40,11 @@ namespace ContactCase.ContactApi.Services
             // create channel  
             _channel = _connection.CreateModel();
 
-            _channel.ExchangeDeclare("demo.exchange", ExchangeType.Topic);
-            _channel.QueueDeclare("demo.queue.log", false, false, false, null);
-            _channel.QueueBind("demo.queue.log", "demo.exchange", "demo.queue.*", null);
-            _channel.BasicQos(0, 1, false);
+            var QueueName = "RAPOROLUSTUR";
+            var exchangeName = "RAPOROLUSTUR-Exchange";
+            _channel.ExchangeDeclare(exchangeName, ExchangeType.Topic, true);
+            _channel.QueueDeclare(QueueName, false, false, false, null);
+            _channel.QueueBind(QueueName, exchangeName, "");
 
             _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
         }
@@ -85,7 +86,7 @@ namespace ContactCase.ContactApi.Services
             consumer.Unregistered += OnConsumerUnregistered;
             consumer.ConsumerCancelled += OnConsumerConsumerCancelled;
 
-            _channel.BasicConsume("demo.queue.log", false, consumer);
+            _channel.BasicConsume("RAPOROLUSTUR", false, consumer);
             return Task.CompletedTask;
         }
 

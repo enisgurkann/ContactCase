@@ -20,10 +20,13 @@ namespace ContactCase.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(ReportModel model)
+        public async Task<IActionResult> Create(string Tag)
         {
+            ReportModel model = new ReportModel();
+            model.Tag = Tag;
+
             if (ModelState.IsValid) {
-                var createResult = await _reportApiClient.CreateReport(model);
+                var createResult = await _reportApiClient.CreateReport(Tag);
                 if (createResult is not null) {
                     return RedirectToAction("Index");
                 }

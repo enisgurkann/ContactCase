@@ -6,7 +6,28 @@
 <div class="text-center">
     <h1 class="display-4">Reports</h1>
 </div>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <div class="card-header">
+                <h4>New Report</h4>
+            </div>
+            <div class="card-body">
 
+                <form asp-action="Create" asp-controller="Report" method="post" role="form" novalidate>
+                    <div class="form-group">
+                        <label for="Tag">Tag</label>
+                        <input class="form-control" for="Tag"  name="Tag" />
+                        <span validation-for="Tag" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary">Create Report</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row mt-5">
     <div class="col">
         <table class="table table-bordered table-striped">
@@ -42,15 +63,5 @@
             </tbody>
         </table>
     </div>
-    <div class="col">
-        <div class="card">
-            <div class="card-header">
-                <h4>New Report</h4>
-            </div>
-            <div class="card-body">
-             
 
-            </div>
-        </div>
-    </div>
 </div>
