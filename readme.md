@@ -23,7 +23,7 @@ Kayýtlý raporlarý görebilir.
 * Apileri ve Web Projesini start ederk projeyi çalýþtýrabilirsiniz
 * Her API kendisi için ayrý veritabanýna sahiptir.
 * Web application herhangi bir veritabaný ile haberleþmez. RabbitMQ gelen mesajlarý dinleyebilir veya API'lara http isteði yapabilir.
-* API'lar birbirlerinin veritabanlarýna eriþmezler. Arada iletiþim gerekli olmasý durumunda Kafka üzerinden mesajlarýný iletirler.
+* API'lar birbirlerinin veritabanlarýna eriþmezler. Arada iletiþim gerekli olmasý durumunda RabbitMQ üzerinden mesajlarýný iletirler.
 
 ** Projede loglama için <strong>Serilog</strong> kullandým fakat herhangi bir daðýtýk yapýya baðlý deðil. Sadece <strong>Development</strong> modunda <strong>Information</strong> seviyesinde console loglama yapýyor.
 
