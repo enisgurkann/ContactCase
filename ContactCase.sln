@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactCase.Gateway", "ContactCase.Gateway\ContactCase.Gateway.csproj", "{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactCase.ReportApi", "ContactCase.ReportApi\ContactCase.ReportApi.csproj", "{CB664F18-C769-40E0-B68F-1A56042E6AF0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactCase.Web", "ContactCase.Web\ContactCase.Web.csproj", "{2DD74D35-30A3-430E-B7E7-31DFF064B881}"
@@ -36,10 +34,6 @@ Global
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4237BC-5430-4AC0-B2E1-F88F58DD5E1C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D12467E2-6EB7-4EC2-9248-07BA1F97A07C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB664F18-C769-40E0-B68F-1A56042E6AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB664F18-C769-40E0-B68F-1A56042E6AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB664F18-C769-40E0-B68F-1A56042E6AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU

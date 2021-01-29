@@ -3,9 +3,11 @@ using ContactCase.ReportApi.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactCase.ReportApi.Controllers
@@ -51,8 +53,40 @@ namespace ContactCase.ReportApi.Controllers
         public async Task<IActionResult> Create([FromBody] string Tag)
         {
             var reportModel = await _reportService.Add(Tag);
-            if (reportModel)
+            
+            if (reportModel is not null) {
+
+                var factory = new ConnectionFactory {
+                    HostName = "localhost",
+                    UserName = "guest",
+                    Password = "guest",
+                };
+
+                using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel()) {
+
+                    channel.ExchangeDeclare("demo.exchange", ExchangeType.Topic);
+                    channel.QueueDeclare("demo.queue.log", false, false, false, null);
+                    channel.QueueBind("demo.queue.log", "demo.exchange", "demo.queue.*", null);
+                    channel.BasicQos(0, 1, false);
+
+                    channel.QueueDeclare(queue: "ReportQuee",
+                                         durable: false,
+                                         exclusive: false,
+                                         autoDelete: false,
+                                         arguments: null);
+
+                    var message =$"RAPOROLUSTUR${reportModel.Id}${Tag}";
+                    var body = Encoding.UTF8.GetBytes(message);
+
+                    channel.BasicPublish(exchange: "",
+                                         routingKey: "ReportQuee",
+                                         basicProperties: null,
+                                         body: body);
+                }
+
                 return Ok(reportModel);
+            }
             else
                 return NotFound("Error");
         }

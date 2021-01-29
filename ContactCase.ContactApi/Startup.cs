@@ -47,6 +47,8 @@ namespace ContactCase.ContactApi
             services.AddCors();
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+            services.AddHostedService<ContactMQService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

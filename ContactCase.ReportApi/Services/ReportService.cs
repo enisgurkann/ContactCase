@@ -13,7 +13,7 @@ namespace ContactCase.ReportApi.Services
         private readonly AppDBContext _datacontext;
         public ReportService(AppDBContext context) => _datacontext = context;
 
-        public async Task<bool> Add(string Tag)
+        public async Task<Report> Add(string Tag)
         {
             var report = new Report();
             report.Tag = Tag;
@@ -21,7 +21,7 @@ namespace ContactCase.ReportApi.Services
             report.Status = false;
             await _datacontext.Report.AddAsync(report);
             await _datacontext.SaveChangesAsync();
-            return true;
+            return report;
         }
 
 
