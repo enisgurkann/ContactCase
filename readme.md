@@ -1,12 +1,6 @@
 ### Contact Case
 
 
-## Build Status
-| Build server    | Platform       | Status      |
-|-----------------|----------------|-------------|
-| Github Actions  | ubuntu |![](https://github.com/enisgurkann/ContactCase/workflows/.NET%20CI/badge.svg) |
-
-
 ##### Contact API
 Ýletiþim bilgileri saklanýr.<br>
 Ekle/güncelle/sil ve listele iþlemleri yapýlýr.<br>
@@ -26,9 +20,9 @@ Rapor talebinde bulunabilir.<br>
 Kayýtlý raporlarý görebilir.
 
 ### Projenin çalýþtýrýlmasý hakkýnda
-* Proje ana dizininde `docker-compose up -d` diyerek projeyi ayaða kaldýrabilirsiniz.
+* Apileri ve Web Projesini start ederk projeyi çalýþtýrabilirsiniz
 * Her API kendisi için ayrý veritabanýna sahiptir.
-* Web application herhangi bir veritabaný ile haberleþmez. Kafkadan gelen mesajlarý dinleyebilir veya API'lara http isteði yapabilir.
+* Web application herhangi bir veritabaný ile haberleþmez. RabbitMQ gelen mesajlarý dinleyebilir veya API'lara http isteði yapabilir.
 * API'lar birbirlerinin veritabanlarýna eriþmezler. Arada iletiþim gerekli olmasý durumunda Kafka üzerinden mesajlarýný iletirler.
 
 ** Projede loglama için <strong>Serilog</strong> kullandým fakat herhangi bir daðýtýk yapýya baðlý deðil. Sadece <strong>Development</strong> modunda <strong>Information</strong> seviyesinde console loglama yapýyor.
@@ -41,12 +35,5 @@ Report API: https://localhost:5021
 * .Net 5.0
 * EntityFramework Core 5.0
 * Swagger(OpenAPI v3 UI)
-* Mediator(CQRS)
-* AutoMapper
-* FluentValidation
-* Serilog
-* xUnit
-* Kafka
-* Docker
-* Docker Compose
+* RabbitMQ
 * PostgreSQL 12.5
